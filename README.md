@@ -83,13 +83,12 @@ git clone https://github.com/Shikhar97/KeyValueStore.git
 minikube start
 cd KeyValueStore/deployment/redis
 kubectl -n kvstore apply -f redis-statefulSet.yml
-kubectl -n kvstore apply -f redis-service.yml
 ```
 
 **3. Deploy the FASTApi server**
 ```bash
 cd KeyValueStore/deployment/kvserver
-kubectl -n kvstore apply -f kvserver-service.yml
+kubectl -n kvstore apply -f kvserver-deployment.yml
 ```
 
 **4. Enable port-forwarding** 
@@ -101,15 +100,17 @@ kubectl -n kvstore port-forward svc/fastapi-service 8000:8000
 ```bash
 cd KeyValueStore/deployment/redis
 kubectl -n kvstore delete -f redis-statefulSet.yml
-kubectl -n kvstore delete -f redis-service.yml
 
 cd KeyValueStore/deployment/kvserver
-kubectl -n kvstore delete -f kvserver-service.yml
+kubectl -n kvstore delete -f kvserver-deployment.yml
 minikube stop
 minikube delete
 ```
 
 Access FastAPI server at [http://localhost:8000/api/v1/](http://localhost:8000/api/v1) using Postman or any other tool.
+
+
+**_Docker images are built on arm64 architechture. Not supported on amd64._**
 
 ## API Documentation
 Check the available APIs at [http://localhost:8000/docs](http://localhost:8000/docs) 
