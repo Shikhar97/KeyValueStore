@@ -1,19 +1,17 @@
 import os
 import redis
 from huey import RedisHuey
-from dotenv import load_dotenv
 
-load_dotenv()
 
-APP_NAME = os.getenv("APP_NAME")
-HOST = os.getenv("HOST")
-PORT = os.getenv("PORT")
+APP_NAME = os.getenv("APP_NAME", "redis-huey-client")
+HOST = os.getenv("HOST", "localhost")
+PORT = os.getenv("PORT", 6379)
 
 redis_client = redis.StrictRedis(host=HOST, port=PORT, decode_responses=True)
 
 huey = RedisHuey(
     APP_NAME,  # Replace with your app name
-    host=HOST,  # Redis server hostname
+    host="redis.kvstore",  # Redis server hostname
     port=PORT,  # Redis server port
     # blocking=True,  # Use blocking-pop when reading from the queue
 )

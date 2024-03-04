@@ -1,11 +1,7 @@
-import os
-
 from fastapi import FastAPI, status, HTTPException
-
 from redis_huey import get_key, delete_key, add_key
 from models.key_value_model import KeyValueModel
-import sys
-sys.path.insert(0, os.path.join("..", os.path.dirname(__file__)))
+
 
 app = FastAPI()
 
@@ -19,7 +15,6 @@ async def add_value(data: KeyValueModel):
             "message": "Value added successfully"
         }
     except Exception as e:
-        print("hello")
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
