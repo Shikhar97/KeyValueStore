@@ -121,7 +121,7 @@ Check the available APIs at [http://localhost:8000/docs](http://localhost:8000/d
 1. **Navigate to the root directory of your project:**
 
     ```bash
-    cd KeyValueStore
+    cd KeyValueStore/app
     ```
 
 2. **Install pytest:**
@@ -133,7 +133,7 @@ Check the available APIs at [http://localhost:8000/docs](http://localhost:8000/d
 3. **Run the test cases using pytest:**
 
     ```bash
-    pytest tests/
+    pytest tests.py
     ```
 
 The test results will be displayed in the terminal, indicating whether each test passed or failed.
