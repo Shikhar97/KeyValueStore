@@ -15,13 +15,34 @@ data:
     dir /data
 ---
 
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: redis-cluster-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: redis-cluster
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+
+---
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: redis-cluster
 spec:
   serviceName: redis-cluster
-  replicas: 6
+  replicas: 3
   selector:
     matchLabels:
       app: redis-cluster
