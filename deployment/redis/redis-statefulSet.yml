@@ -4,15 +4,15 @@ metadata:
   name: redis-cluster-configmap
 data:
   redis.conf: |-
-    cluster-enabled yes
-    cluster-require-full-coverage no
-    cluster-node-timeout 15000
-    cluster-config-file /data/nodes.conf
-    cluster-migration-barrier 1
-    appendonly yes
-    protected-mode no
     bind 0.0.0.0
     port 6379
+    protected-mode no
+    save 900 1
+    save 300 10
+    save 60 10000
+    appendonly yes
+    appendfilename "appendonly.aof"
+    dir /data
 ---
 
 apiVersion: apps/v1
