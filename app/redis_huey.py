@@ -11,7 +11,7 @@ redis_client = redis.StrictRedis(host=HOST, port=PORT, decode_responses=True)
 
 huey = RedisHuey(
     APP_NAME,  # Replace with your app name
-    host="redis.kvstore",  # Redis server hostname
+    host=HOST,  # Redis server hostname
     port=PORT,  # Redis server port
     # blocking=True,  # Use blocking-pop when reading from the queue
 )
